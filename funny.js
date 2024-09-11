@@ -1,22 +1,18 @@
-function intro_banner() {
-    var current_transparency = 1;
-    var running = true;
-    var banner = document.getElementById("banner");
-        
-    function decreaseOpacity() {
-        banner.style.opacity = current_transparency;
-        current_transparency -= 0.02;
+window.onload = function() {
+    const topImage = document.getElementById('top-image');
+    let opacity = 1;
+    const fadeDuration = 1000;
+    const fadeStep = 10;
+    const finalOpacity = 0.2
 
-        if (current_transparency >= 1) {
-            running = false;
-        } else {
-            setTimeout(decreaseOpacity, 1000);
-        }
-    }
-
-    decreaseOpacity();
+    setTimeout(function() {
+        const fadeInterval = setInterval(function() {
+            if (opacity > finalOpacity) {
+                opacity -= (fadeStep / fadeDuration);
+                topImage.style.opacity = opacity;
+            } else {
+                clearInterval(fadeInterval);
+            }
+        }, fadeStep);
+    }, 2500);
 }
-
-document.addEventListener("DOMContentLoaded", function(event){
-    intro_banner();
-});
