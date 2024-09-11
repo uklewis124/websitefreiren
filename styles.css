@@ -6,11 +6,44 @@
     height: 10vh;
     background-color: linear-gradient(rgba(0,0,0,1), rgba(0,0,0,0));
     z-index: 100;
+    opacity: 0
+}
+
+/*Menu Buttons*/
+#menu button {
+    font: 2vw 'Poppins', sans-serif;
+    font-weight: 700;
+    width: 10vw;
+    height: 5vh;
+    -webkit-text-fill-color: transparent;
+    border: none;
+    background-color: transparent;
+}
+
+#menu-buttons {
+    position: absolute;
+    left: auto;
+    right: 5vw;
+    top: 6vh;
+    background-image: linear-gradient(rgba(0,167,90,1), rgba(2,133,205,1));
+    background-clip: text;
+}
+
+#menu #about-button {
+    border-left: black 2px solid;
+    border-right: black 2px solid;
+    border-image: linear-gradient(rgba(0,167,90,1), rgba(2,133,205,1));
+    border-image-slice: 1;
+}
+
+#menu #watch-button {
+    width: 12vw;
 }
 
 #menu img {
     position: relative;
     left: 5vw;
+    top: 2.5vh;
     height: 10vh;
     object-fit: contain;
 }
