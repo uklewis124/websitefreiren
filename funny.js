@@ -6,6 +6,27 @@ window.onload = function() {
     const fadeDuration = 1000;
     const fadeStep = 10;
     const finalOpacity = 0.2
+    let loadOpacity = 1;
+
+    // Removing Loading Screen
+
+    const loading = document.getElementById('loading');
+    const loadingText = document.getElementById('loading').getElementsByTagName('p')[0];
+
+    setTimeout(function() {
+        const fadeInterval = setInterval(function() {
+            if (loadOpacity > 0) {
+                loadOpacity -= (fadeStep / 500);
+                loading.style.opacity = loadOpacity;
+                loadingText.style.opacity = loadOpacity;
+                loading.style.backgroundColor = `rgba(255, 255, 255, ${loadOpacity})`;
+            } else {
+                clearInterval(fadeInterval);
+            };
+        }, fadeStep);
+    }, 1000);
+
+    
 
     setTimeout(function() {
         const fadeInterval = setInterval(function() {
@@ -19,5 +40,5 @@ window.onload = function() {
                 clearInterval(fadeInterval);
             }
         }, fadeStep);
-    }, 2500);
+    }, 1000);
 }
