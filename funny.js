@@ -50,17 +50,16 @@ function hideMenu() {
     const menu = document.getElementById('menu')
     let menuOpacity = 0;
     const menuFadeStep = 10;
-    
 
     var currentScroll = window.scrollY;
 
     // Identify if page has been scrolled more than 350px, if it has,
     // it will make the menu bar at the top of the screen's background
     // visible. By default, the menu background is transparent.
-    if (currentScroll > 10 || document.documentElement.scrollTop > 10) {
+    if (currentScroll < 10) {
         setTimeout(function() {
             const fadeInterval = setInterval(function() {
-                if (menuOpacity > 0) {
+                if (menuOpacity < 1) {
                     menuOpacity -= (menuFadeStep / 500);
                     menu.style.backgroundImage = `linear-gradient(rgba(255,255,255,${menuOpacity}), rgba(255,255,255,${menuOpacity - 50}))`;
                 } else {
@@ -68,7 +67,8 @@ function hideMenu() {
                 };
             }, menuFadeStep);
         }, 0);
-    } else {
+    } else if (currentScroll > 10) {
+        let menuOpacity = 
         setTimeout(function() {
             const fadeInterval = setInterval(function() {
                 if (menuOpacity > 1) {
