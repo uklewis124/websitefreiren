@@ -56,7 +56,7 @@ function hideMenu() {
     let menuState = false;
 
     // Checking whether menu should be visible or invivisble
-    if (currentScroll > 50) {
+    if (menuState == false) {
         // Set menu to 1 opacity
         console.log(`Scroll Detected | Scroll = ${currentScroll} | menuOpacity = ${menuOpacity}`)
         menu.style.backgroundColor = 'transparent';
@@ -73,6 +73,7 @@ function hideMenu() {
                 }
             }, menuFadeStep); // execute function every fademilistep secconds
         }, 0); //Delay of whole fade
+        menuState = true;
     } else {
         // Set menu to 0 opacity
         console.log(`Scroll Detected | Scroll = ${currentScroll} | menuOpacity = ${menuOpacity}`)
@@ -81,7 +82,7 @@ function hideMenu() {
             console.log(`Timeout Ran | Scroll = ${currentScroll} | menuOpacity = ${menuOpacity}`)
             const fadeInterval3 = setInterval(function(){
                 console.log(`Interval Ran | Scroll = ${currentScroll} | menuOpacity = ${menuOpacity}`)
-                if (menuOpacity > 0) {
+                if (menuState == true) {
                     menuOpacity -= 0.05;
                     menu.style.backgroundImage = `linear-gradient(rgba(255,255,255,${menuOpacity}), rgba(255,255,255,${menuOpacity - 0.5}))`
                 }
