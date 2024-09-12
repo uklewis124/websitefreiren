@@ -11,6 +11,7 @@
 }
 
 #loading p {
+    position: block;
     background-image: linear-gradient(rgba(0,167,90,1), rgba(2,133,205,1));
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -19,15 +20,20 @@
     color: white;
 }
 
+#loading .loading-long-message {
+    position: block;
+    font-size: 3.5vw;
+}
+
 /* Menu at top of screen */
 #menu {
     position: fixed;
     top: 0;
     width: 100vw;
     height: 16vh;
-    /*background-image: linear-gradient(rgba(255,255,255,1) 80%, rgba(255,255,255,0));*/
+    background-image: linear-gradient(rgba(255,255,255,0) 80%, rgba(255,255,255,0));
     z-index: 100;
-    opacity: 0
+    opacity: 0;
 }
 
 /*Menu Buttons*/
@@ -46,14 +52,14 @@
     left: auto;
     right: 5vw;
     top: 6vh;
-    background-image: linear-gradient(rgba(0,167,90,1), rgba(2,133,205,1));
+    background-image: linear-gradient(rgba(0,167,90,1) 80%, rgba(2,133,205,1));
     background-clip: text;
 }
 
 #menu #about-button {
     border-left: black 2px solid;
     border-right: black 2px solid;
-    border-image: linear-gradient(rgba(0,167,90,1), rgba(2,133,205,1));
+    border-image: linear-gradient(rgba(0,167,90,1) 80%, rgba(2,133,205,1));
     border-image-slice: 1;
 }
 
