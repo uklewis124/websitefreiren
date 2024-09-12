@@ -54,31 +54,34 @@ function hideMenu() {
     var currentScroll = window.scrollY;
     var menuState = false;
 
+    // Checking whether menu should be visible or invivisble
+    if (currentScroll > 50) {
+        menuState = true
+    } else {
+        menuState = false
+    }
     // Identify if page has been scrolled more than 350px, if it has,
     // it will make the menu bar at the top of the screen's background
     // visible. By default, the menu background is transparent.
-    if (menuState == false) {
+    if (menuState == false) { // if menu should be visible
         setTimeout(function() {
-            const fadeInterval = setInterval(function() {
-                if (menuOpacity < 1 && menuOpacity > 0) {
+            const menuFadeInterval = setInterval(function() {
+                if (menuOpacity > 0) {
                     menuOpacity -= (menuFadeStep / 500);
-                    menu.style.backgroundImage = `linear-gradient(rgba(255,255,255,${menuOpacity}), rgba(255,255,255,${menuOpacity - 50}))`;
+                    //loading.style.opacity = loadOpacity;
+                    //loadingText.style.opacity = loadOpacity;
+                    loading.style.backgroundImage = `linear-gradient(rgba(255, 255, 255, ${loadOpacity}), rgba(255,255,255, ${loadOpacity})`;
                 } else {
-                    clearInterval(fadeInterval);
+                    clearInterval(menuFadeInterval);
                 };
-            }, menuFadeStep);
-        }, 0);
-    } else {
+            }, fadeStep);
+        }, 1000);
+    } else { // menu should be invisible
         let menuOpacity = 
         setTimeout(function() {
-            const fadeInterval = setInterval(function() {
-                if (menuOpacity > 1 && menuOpacity < 0) {
-                    menuOpacity += (menuFadeStep / 500);
-                    menu.style.backgroundImage = `linear-gradient(rgba(255,255,255,${menuOpacity}) 80%, rgba(255,255,255,${menuOpacity - 50}))`;
-                } else {
-                    clearInterval(fadeInterval);
-                };
-            }, menuFadeStep);
+            const fadeInterval = setTimeout(function() {
+                //Function for fade goes here
+            }, 2000)
         }, 0);
     }
 }
