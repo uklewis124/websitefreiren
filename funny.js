@@ -3,31 +3,37 @@ window.onload = function() {
     const menu = document.getElementById('menu');
     let opacity = 1;
     let menuOpacity = 0;
-    const fadeDuration = 1000;
-    const fadeStep = 10;
+    const fadeDuration = 2000;
+    const fadeStep = 1;
     const finalOpacity = 0.2
-    let loadOpacity = 1;
+    const menuFadeStep = 10;
+    const menuFadeDuration = 1000;
 
     // Removing Loading Screen
 
     const loading = document.getElementById('loading');
     const loadingText = document.getElementById('loading').getElementsByTagName('p')[0];
 
-    setTimeout(function() {
-        const fadeInterval = setInterval(function() {
-            if (loadOpacity > 0) {
-                loadOpacity -= (fadeStep / 500);
-                loading.style.opacity = loadOpacity;
-                loadingText.style.opacity = loadOpacity;
-                loading.style.backgroundColor = `rgba(255, 255, 255, ${loadOpacity})`;
-            } else {
-                clearInterval(fadeInterval);
-            }
-            
-            // Call the hideMenu function to ensure it runs
-            hideMenu();
-        }, fadeStep);
-    }, 1000);
+    function removeLoadingScreen() {
+        const loadFadeDuration = 1000;
+        const loadFadeStep = 10;
+        let loadOpacity = 1;
+        setTimeout(function() {
+            const fadeInterval = setInterval(function() {
+                if (loadOpacity > 0) {
+                    loadOpacity -= (loadFadeStep / loadFadeDuration);
+                    loading.style.opacity = loadOpacity;
+                    loadingText.style.opacity = loadOpacity;
+                    loading.style.backgroundColor = `rgba(255, 255, 255, ${loadOpacity})`;
+                } else {
+                    clearInterval(fadeInterval);
+                }
+                
+                // Call the hideMenu function to ensure it runs
+                hideMenu();
+            }, loadFadeStep);
+        }, 1000);
+    }
 
     // Waiting for user to scroll but keeps the scroll at the top before menu appears, and music starts playing
     // once both conditions are met, the user can scroll freely.
@@ -43,32 +49,45 @@ window.onload = function() {
         } else {
             audio.pause();
         }
-    }
-    
-    document.addEventListener('scroll', (event) => {
-        if (!conditionsMet) {
-            playAudio();
-            window.scrollTo(0, 0);
-    
-            if (!timeoutStarted) {
-                timeoutStarted = true;
-                setTimeout(function() {
-                    const fadeInterval = setInterval(function() {
-                        if (opacity > finalOpacity) {
-                            opacity -= (fadeStep / fadeDuration);
-                            topImage.style.opacity = opacity;
-    
-                            menuOpacity += (fadeStep / fadeDuration);
-                            menu.style.opacity = menuOpacity;
-                        } else {
-                            clearInterval(fadeInterval);
-                            conditionsMet = true; // Allow scrolling after fade effect
-                        }
-                    }, fadeStep);
-                }, 1000);
+    };
+
+
+    document.addEventListener('keydown', (event) => {
+        if (event.code === 'Space') {
+            event.preventDefault();
+            if (!conditionsMet) {
+                playAudio();
+                window.scrollTo(0, 0);
+                removeLoadingScreen();
+        
+                if (!timeoutStarted) {
+                    timeoutStarted = true;
+                    function fader(option1, delayValue) {
+                        setTimeout(function() {
+                            const fadeInterval = setInterval(function() {
+                                if (opacity > finalOpacity) {
+                                    if (option1 == true) {
+                                        opacity -= (fadeStep / fadeDuration);
+                                        topImage.style.opacity = opacity;
+                                    } else {
+                                        menuOpacity += (menuFadeStep / menuFadeDuration);
+                                        menu.style.opacity = menuOpacity;
+                                    }
+                                } else {
+                                    clearInterval(fadeInterval);
+                                    conditionsMet = true; // Allow scrolling after fade effect
+                                }
+                            }, option1 ? fadeStep : menuFadeStep);
+                        }, delayValue);
+                    };
+
+                    fader(true, 1500);  // Background Fader
+                    fader(false, 6000);  // Menu Fader
+                }
             }
         }
     });
+
 };
 
 let currentScroll = 0;
