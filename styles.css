@@ -123,3 +123,33 @@ body {
     height: 100vw;
     top: 200vh;
 }
+
+/* Section One: The Series */
+#section1 {
+    position: absolute;
+    width: 100vw;
+    max-height: 100vh;
+    top: 110vh;
+}
+
+#section1 .textbox1 {
+    font: 'Poppins', sans-serif;
+}
+
+#section1 .textbox1 h2 {
+    font-size: 4em;
+    color: rgba(0,0,0,0);
+    background-image: linear-gradient(rgba(0,167,90,1), rgba(2,133,205,1));
+    background-clip: text;
+}
+
+#section1 .textbox1 p {
+    font-size: 2.5em;
+    font-weight: 600;
+    color: black;
+}
+
+#section1 .frierenPopout img {
+    width: 30%;
+    object-fit: contain;
+}

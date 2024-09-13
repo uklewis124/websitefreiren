@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frieren: A Journey Beyond</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <script type="text/javascript" src="funny.js"></script>
 </head>
 <body>
+    <audio id="music" src="music/intro.mp3"></audio>
+    <script type="text/javascript" src="backgroundMusic.js"></script>
     <div class="container" id="menu">
         <img src="img/logo-h.webp">
         <div class="container" id="menu-buttons">
@@ -26,13 +29,13 @@
         <p id="loading-long-message">This shouldn't take long...</p>
     </div>
 
-    <div class="container">
+    <div class="container" id="section1">
         <div class="textbox1">
             <h2>Frieren: Beyond Journey's End</h2>
             <p>Something about the anime</p>
             <button class="button-light">Watch on Crunchyroll</button>
         </div>
-        <div class="frierenPopout"></div>
+        <div class="frierenPopout"><img src='img/frieren-fly.png'></div>
         <div class="emptyBox"></div>
     </div>
 

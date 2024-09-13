@@ -22,28 +22,57 @@ window.onload = function() {
                 loading.style.backgroundColor = `rgba(255, 255, 255, ${loadOpacity})`;
             } else {
                 clearInterval(fadeInterval);
-            };
-        }, fadeStep);
-    }, 1000);
-
-    
-
-    setTimeout(function() {
-        const fadeInterval = setInterval(function() {
-            if (opacity > finalOpacity) {
-                opacity -= (fadeStep / fadeDuration);
-                topImage.style.opacity = opacity;
-
-                menuOpacity += (fadeStep / fadeDuration);
-                menu.style.opacity = menuOpacity;
-            } else {
-                clearInterval(fadeInterval);
             }
+            
+            // Call the hideMenu function to ensure it runs
+            hideMenu();
         }, fadeStep);
     }, 1000);
-}
 
-addEventListener("scroll", (event) => {hideMenu()});
+    // Waiting for user to scroll but keeps the scroll at the top before menu appears, and music starts playing
+    // once both conditions are met, the user can scroll freely.
+
+    const audio = document.getElementById('music');
+
+    let conditionsMet = false;
+    let timeoutStarted = false;
+    
+    function playAudio() {
+        if (audio.paused) {
+            audio.play();
+        } else {
+            audio.pause();
+        }
+    }
+    
+    document.addEventListener('scroll', (event) => {
+        if (!conditionsMet) {
+            playAudio();
+            window.scrollTo(0, 0);
+    
+            if (!timeoutStarted) {
+                timeoutStarted = true;
+                setTimeout(function() {
+                    const fadeInterval = setInterval(function() {
+                        if (opacity > finalOpacity) {
+                            opacity -= (fadeStep / fadeDuration);
+                            topImage.style.opacity = opacity;
+    
+                            menuOpacity += (fadeStep / fadeDuration);
+                            menu.style.opacity = menuOpacity;
+                        } else {
+                            clearInterval(fadeInterval);
+                            conditionsMet = true; // Allow scrolling after fade effect
+                        }
+                    }, fadeStep);
+                }, 1000);
+            }
+        }
+    });
+};
+
+let currentScroll = 0;
+addEventListener("scroll", (event) => {currentScroll = document.scrollY});
 
 
 function hideMenu() {
@@ -95,4 +124,4 @@ function hideMenu() {
     // Identify if page has been scrolled more than 350px, if it has,
     // it will make the menu bar at the top of the screen's background
     // visible. By default, the menu background is transparent.
-}
+};
